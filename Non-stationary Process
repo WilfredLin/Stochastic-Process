@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Function to generate a non-stationary process
+def generate_nonstationary_process(n, trend=0, seasonal_period=0, seasonal_amplitude=0):
+    # Generate time variable
+    time = np.arange(n)
+    
+    # Create a trend component
+    trend_component = trend * time
+    
+    # Create a seasonal component if seasonal_period is specified
+    if seasonal_period > 0:
+        seasonal_component = seasonal_amplitude * np.sin(2 * np.pi * time / seasonal_period)
+    else:
+        seasonal_component = np.zeros(n)
+    
+    # Generate white noise
+    white_noise = np.random.normal(0, 1, n)
+    
+    # Combine components to form a non-stationary process
+    nonstationary_process = trend_component + seasonal_component + white_noise
+    return nonstationary_process
+
+# Parameters
+n = 1000  # Number of samples
+trend = 0.01  # Linear trend
+seasonal_period = 50  # Period of seasonal component
+seasonal_amplitude = 2  # Amplitude of seasonal component
+
+# Generate the non-stationary process
+nonstationary_process = generate_nonstationary_process(n, trend, seasonal_period, seasonal_amplitude)
+
+# Plotting the process
+plt.figure(figsize=(12, 6))
+plt.plot(nonstationary_process, label='Non-Stationary Process', color='orange')
+plt.title('Non-Stationary Process Time Series')
+plt.xlabel('Time')
+plt.ylabel('Value')
+plt.legend()
+plt.grid()
+plt.show()
