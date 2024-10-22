@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+num_steps = 1000  # Number of steps in the process
+step_size = 1      # Step size for the random walk
+
+# Initialize the random walk
+walk = np.zeros(num_steps)
+
+# Generate the random walk
+for i in range(1, num_steps):
+    step = np.random.choice([-step_size, step_size])  # Random step of -1 or +1
+    walk[i] = walk[i - 1] + step  # Update the position
+
+# Plot the random walk
+plt.figure(figsize=(12, 6))
+plt.plot(walk, label='Random Walk', color='blue')
+plt.title('Stochastic Process: Random Walk')
+plt.xlabel('Steps')
+plt.ylabel('Position')
+plt.axhline(0, color='black', lw=0.5, ls='--')
+plt.legend()
+plt.grid()
+plt.show()
