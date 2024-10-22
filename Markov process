@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+num_steps = 1000  # Number of steps in the Markov process
+states = [0, 1]   # Define two states: 0 and 1
+transition_matrix = [[0.8, 0.2],  # Probability of moving from state 0 to state 0 and 1
+                     [0.4, 0.6]]  # Probability of moving from state 1 to state 0 and 1
+
+# Function to simulate a Markov process
+def simulate_markov_process(num_steps, transition_matrix, initial_state):
+    state_sequence = [initial_state]
+    for _ in range(num_steps - 1):
+        current_state = state_sequence[-1]
+        next_state = np.random.choice(states, p=transition_matrix[current_state])
+        state_sequence.append(next_state)
+    return state_sequence
+
+# Simulate the Markov process starting from state 0
+initial_state = 0
+markov_process = simulate_markov_process(num_steps, transition_matrix, initial_state)
+
+# Plot the Markov process
+plt.figure(figsize=(12, 6))
+plt.plot(markov_process, label='Markov Process', color='blue')
+plt.title('Markov Process Simulation')
+plt.xlabel('Step')
+plt.ylabel('State')
+plt.yticks(states)  # Set y-ticks to display the states
+plt.axhline(0.5, color='black', lw=0.5, ls='--')  # Add a horizontal line for visual reference
+plt.legend()
+plt.grid()
+plt.show()
