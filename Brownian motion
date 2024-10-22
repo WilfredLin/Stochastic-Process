@@ -1,0 +1,24 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+num_points = 1000  # Number of points in the process
+time_end = 10      # End time for the simulation
+dt = time_end / num_points  # Time increment
+
+# Time array
+time = np.linspace(0, time_end, num_points)
+
+# Generate a continuous-time stochastic process (e.g., Brownian motion)
+brownian_motion = np.cumsum(np.random.normal(loc=0, scale=np.sqrt(dt), size=num_points))
+
+# Plot the Brownian motion
+plt.figure(figsize=(12, 6))
+plt.plot(time, brownian_motion, label='Brownian Motion', color='green')
+plt.title('Continuous-Time Stochastic Process: Brownian Motion')
+plt.xlabel('Time')
+plt.ylabel('Position')
+plt.axhline(0, color='black', lw=0.5, ls='--')
+plt.legend()
+plt.grid()
+plt.show()
